@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		171731882D9F4EBF00ACD831 /* RenderMeThis in Frameworks */ = {isa = PBXBuildFile; productRef = 171731872D9F4EBF00ACD831 /* RenderMeThis */; };
+		171731942D9F535900ACD831 /* ErrorManager in Frameworks */ = {isa = PBXBuildFile; productRef = 171731932D9F535900ACD831 /* ErrorManager */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		178B23882D9F37DD00185F02 /* Cookture Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cookture Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171731882D9F4EBF00ACD831 /* RenderMeThis in Frameworks */,
+				171731942D9F535900ACD831 /* ErrorManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = "Cookture Prototype";
 			packageProductDependencies = (
+				171731872D9F4EBF00ACD831 /* RenderMeThis */,
+				171731932D9F535900ACD831 /* ErrorManager */,
 			);
 			productName = "Cookture Prototype";
 			productReference = 178B23882D9F37DD00185F02 /* Cookture Prototype.app */;
@@ -94,6 +103,10 @@
 			);
 			mainGroup = 178B237F2D9F37DC00185F02;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				171731862D9F4EBF00ACD831 /* XCRemoteSwiftPackageReference "RenderMeThis" */,
+				171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 178B23892D9F37DD00185F02 /* Products */;
 			projectDirPath = "";
@@ -256,21 +269,28 @@
 				DEVELOPMENT_TEAM = J58GFTTNS3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cookture Prototype";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myungjoonkang.Cookture-Prototype";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -284,21 +304,28 @@
 				DEVELOPMENT_TEAM = J58GFTTNS3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cookture Prototype";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.myungjoonkang.Cookture-Prototype";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -324,6 +351,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		171731862D9F4EBF00ACD831 /* XCRemoteSwiftPackageReference "RenderMeThis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Aeastr/RenderMeThis";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ernest-danials/ErrorManager";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		171731872D9F4EBF00ACD831 /* RenderMeThis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 171731862D9F4EBF00ACD831 /* XCRemoteSwiftPackageReference "RenderMeThis" */;
+			productName = RenderMeThis;
+		};
+		171731932D9F535900ACD831 /* ErrorManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */;
+			productName = ErrorManager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 178B23802D9F37DC00185F02 /* Project object */;
 }

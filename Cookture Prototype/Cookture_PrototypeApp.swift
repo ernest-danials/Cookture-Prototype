@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ErrorManager
 
 @main
 struct Cookture_PrototypeApp: App {
+    @StateObject var viewModel = ViewModel()
+    @StateObject var errorManager = ErrorManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
+                .environmentObject(errorManager)
         }
     }
 }
