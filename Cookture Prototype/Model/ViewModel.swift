@@ -9,4 +9,10 @@ import SwiftUI
 
 final class ViewModel: ObservableObject {
     @Published var selectedRecipe: Recipe? = nil
+    
+    func changeSelectedRecipe(_ recipe: Recipe?) {
+        withAnimation(.spring) {
+            self.selectedRecipe = recipe
+        }
+    }
 }

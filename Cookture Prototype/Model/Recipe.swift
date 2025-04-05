@@ -26,8 +26,7 @@ struct Step: Identifiable, Hashable {
     let order: Int
     let instruction: String
     let imageName: String?
-    let duration: Int?
-    let isTimerRequired: Bool
+    let timerDuration: Int?
 }
 
 enum Difficulty: String, CaseIterable {
@@ -38,11 +37,11 @@ enum Difficulty: String, CaseIterable {
     var imageName: String {
         switch self {
         case .easy:
-            return "leaf"
+            return "leaf.fill"
         case .medium:
-            return "flame"
+            return "flag.fill"
         case .hard:
-            return "bolt"
+            return "bolt.fill"
         }
     }
 }

@@ -6,21 +6,32 @@
 //
 
 import SwiftUI
+import RenderMeThis
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
         NavigationSplitView {
-            List(CooktureData.recipeData, selection: $viewModel.selectedRecipe) { recipe in
-                NavigationLink(recipe.name, value: recipe)
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    ForEach(CooktureData.recipeData) { recipe in
+                        Button {
+                            self.viewModel.changeSelectedRecipe(recipe)
+                        } label: {
+                            RecipeCard(recipe)
+                        }
+                        .scaleButtonStyle()
+                    }
+                }
             }
+            .prioritiseScaleButtonStyle()
             .navigationTitle("Cookture")
         } detail: {
             if let recipe = viewModel.selectedRecipe {
-                Text(recipe.description)
+                RecipeDetailView(recipe)
             } else {
-                ContentUnavailableView("Choose a recipe", systemImage: "app.dashed")
+                ContentUnavailableView("Choose a recipe", systemImage: "carrot.fill")
             }
         }
     }
