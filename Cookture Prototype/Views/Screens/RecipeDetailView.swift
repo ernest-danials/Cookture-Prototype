@@ -17,64 +17,115 @@ struct RecipeDetailView: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                LazyVStack {
-                    if let imageName = recipe.imageName {
-                        Image(imageName)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geo.size.width - 100, height: 410)
-                            .clipped()
-                            .cornerRadius(20, corners: .allCorners)
-                            .padding(.vertical)
-                    }
+        ScrollView {
+            LazyVStack {
+                if let imageName = recipe.imageName {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 700, height: 410)
+                        .clipped()
+                        .cornerRadius(20, corners: .allCorners)
+                        .padding(.vertical)
+                }
+                
+                Text(recipe.name)
+                    .customFont(size: 33, weight: .black)
+                
+                Text(recipe.description)
+                    .foregroundStyle(.gray)
+                
+                info
+                
+                Divider()
+                    .frame(width: 700)
+                    .padding()
+                
+                VStack {
+                    Text("Ingredients")
+                        .customFont(size: 20, weight: .semibold)
+                        .alignView(to: .leading)
                     
-                    Text(recipe.name)
-                        .customFont(size: 33, weight: .black)
-                    
-                    Text(recipe.description)
-                        .foregroundStyle(.gray)
-                    
-                    HStack {
-                        HStack(spacing: 5) {
-                            Image(systemName: "clock.fill")
-                            
-                            Text("\(recipe.time) mins")
-                        }
-                        
-                        Text("|").foregroundStyle(.gray)
-                        
-                        HStack(spacing: 5) {
-                            Image(systemName: "flame.fill")
-                            
-                            Text("\(recipe.calories) kcal")
-                        }
-                        
-                        Text("|").foregroundStyle(.gray)
-                        
-                        HStack(spacing: 5) {
-                            Image(systemName: "fork.knife")
-                            
-                            Text("\(recipe.servings) servings")
-                        }
-                        
-                        Text("|").foregroundStyle(.gray)
-                        
-                        HStack(spacing: 5) {
-                            Image(systemName: recipe.difficulty.imageName)
-                            
-                            Text("\(recipe.difficulty.rawValue) difficulty")
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(recipe.ingredients) { ingredient in
+                            HStack(spacing: 4) {
+                                Text(ingredient.amount.capitalisedFirst)
+                                    .customFont(size: 20)
+                                
+                                Text(ingredient.name)
+                                    .customFont(size: 20, weight: .medium)
+                                    .foregroundStyle(.seaBlue)
+                            }
                         }
                     }
+                    .alignView(to: .leading)
                     .padding()
                     .background(Material.ultraThin)
-                    .cornerRadius(15, corners: .allCorners)
+                    .cornerRadius(20, corners: .allCorners)
                 }
-            }
-            .navigationTitle(recipe.name)
-            .navigationBarTitleDisplayMode(.inline)
+                .frame(width: 700)
+            }.safeAreaPadding(.bottom, 20)
         }
+        .navigationTitle(recipe.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                self.viewModel.showCookingView()
+            } label: {
+                HStack(spacing: 14) {
+                    Image(systemName: "play.fill")
+                        .customFont(size: 30)
+                        .foregroundStyle(.accent)
+                    
+                    Text("Start Cooking")
+                        .customFont(size: 25, weight: .bold)
+                        .foregroundStyle(.accent)
+                }
+                .padding(25)
+                .background(Color.white)
+                .cornerRadius(28, corners: .allCorners)
+                .padding()
+            }
+            .scaleButtonStyle()
+            .alignView(to: .trailing)
+        }
+    }
+    
+    var info: some View {
+        HStack {
+            HStack(spacing: 5) {
+                Image(systemName: "clock.fill")
+                
+                Text("\(recipe.time) mins")
+            }
+            
+            Text("|").foregroundStyle(.gray)
+            
+            HStack(spacing: 5) {
+                Image(systemName: "flame.fill")
+                
+                Text("\(recipe.calories) kcal")
+            }
+            
+            Text("|").foregroundStyle(.gray)
+            
+            HStack(spacing: 5) {
+                Image(systemName: "fork.knife")
+                
+                Text("\(recipe.servings) servings")
+            }
+            
+            Text("|").foregroundStyle(.gray)
+            
+            HStack(spacing: 5) {
+                Image(systemName: recipe.difficulty.imageName)
+                
+                Text("\(recipe.difficulty.rawValue) difficulty")
+            }
+        }
+        .padding()
+        .background(Material.ultraThin)
+        .cornerRadius(15, corners: .allCorners)
     }
 }
 

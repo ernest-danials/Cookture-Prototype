@@ -34,6 +34,13 @@ struct ContentView: View {
                 ContentUnavailableView("Choose a recipe", systemImage: "carrot.fill")
             }
         }
+        .fullScreenCover(isPresented: $viewModel.isShowingCookingView) {
+            VStack {
+                Text("CookingView for \(self.viewModel.selectedRecipe?.name ?? "nil")")
+                
+                Button("Dismiss") { self.viewModel.hideCookingView() }
+            }
+        }
     }
 }
 

@@ -15,4 +15,18 @@ final class ViewModel: ObservableObject {
             self.selectedRecipe = recipe
         }
     }
+    
+    @Published var isShowingCookingView: Bool = false
+    
+    func showCookingView() {
+        withAnimation(.spring) {
+            self.isShowingCookingView = true
+        }
+    }
+    
+    func hideCookingView() {
+        withAnimation(.spring) {
+            self.isShowingCookingView = false
+        }
+    }
 }

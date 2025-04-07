@@ -13,7 +13,13 @@ struct CooktureData {
             name: "Spaghetti Bolognese",
             description: "A classic Italian pasta with rich meat sauce.",
             imageName: "spaghetti.bolognese",
-            ingredients: ["Spaghetti", "Ground beef", "Tomato sauce", "Onion", "Garlic"],
+            ingredients: [
+                .init(amount: "one pack of", name: "Spaghetti"),
+                .init(amount: "one pack of", name: "Ground beef"),
+                .init(amount: "one cup of", name: "Tomato sauce"),
+                .init(amount: "one", name: "Onion"),
+                .init(amount: "2 cloves of", name: "Garlic")
+            ],
             steps: [
                 Step(order: 1, instruction: "Boil spaghetti until al dente.", imageName: nil, timerDuration: 10),
                 Step(order: 2, instruction: "Cook ground beef until browned.", imageName: nil, timerDuration: 8),
@@ -30,7 +36,13 @@ struct CooktureData {
             name: "Avocado Toast",
             description: "Quick and healthy breakfast with mashed avocado.",
             imageName: "avocado.toast",
-            ingredients: ["Bread", "Avocado", "Salt", "Pepper", "Lemon"],
+            ingredients: [
+                .init(amount: "2 slices of", name: "Bread"),
+                .init(amount: "1 ripe", name: "Avocado"),
+                .init(amount: "1/4 teaspoon of", name: "Salt"),
+                .init(amount: "1/4 teaspoon of", name: "Pepper"),
+                .init(amount: "1/2", name: "Lemon")
+            ],
             steps: [
                 Step(order: 1, instruction: "Toast the bread.", imageName: nil, timerDuration: 3),
                 Step(order: 2, instruction: "Mash avocado with salt, pepper, and lemon juice.", imageName: nil, timerDuration: 2),
@@ -47,7 +59,13 @@ struct CooktureData {
             name: "Chicken Curry",
             description: "Spicy and flavourful Indian-style chicken curry.",
             imageName: "chicken.curry",
-            ingredients: ["Chicken", "Curry powder", "Onion", "Tomato", "Coconut milk"],
+            ingredients: [
+                .init(amount: "500g of", name: "Chicken"),
+                .init(amount: "2 tablespoons of", name: "Curry powder"),
+                .init(amount: "1 large", name: "Onion"),
+                .init(amount: "2", name: "Tomatoes"),
+                .init(amount: "1 can of", name: "Coconut milk")
+            ],
             steps: [
                 Step(order: 1, instruction: "Sauté onions until golden.", imageName: nil, timerDuration: 5),
                 Step(order: 2, instruction: "Add chicken and cook thoroughly.", imageName: nil, timerDuration: 10),
@@ -64,7 +82,13 @@ struct CooktureData {
             name: "Pancakes",
             description: "Fluffy homemade pancakes perfect for breakfast.",
             imageName: "pancakes",
-            ingredients: ["Flour", "Milk", "Egg", "Baking powder", "Sugar"],
+            ingredients: [
+                .init(amount: "1 cup of", name: "Flour"),
+                .init(amount: "1 cup of", name: "Milk"),
+                .init(amount: "1", name: "Egg"),
+                .init(amount: "1 teaspoon of", name: "Baking powder"),
+                .init(amount: "2 tablespoons of", name: "Sugar")
+            ],
             steps: [
                 Step(order: 1, instruction: "Mix dry and wet ingredients into a batter.", imageName: nil, timerDuration: 5),
                 Step(order: 2, instruction: "Heat pan and pour batter.", imageName: nil, timerDuration: 2),
@@ -81,7 +105,13 @@ struct CooktureData {
             name: "Caesar Salad",
             description: "Crisp romaine lettuce with Caesar dressing and croutons.",
             imageName: "caesar.salad",
-            ingredients: ["Romaine", "Croutons", "Parmesan", "Caesar dressing", "Chicken"],
+            ingredients: [
+                .init(amount: "1 head of", name: "Romaine"),
+                .init(amount: "1 cup of", name: "Croutons"),
+                .init(amount: "1/2 cup of", name: "Parmesan"),
+                .init(amount: "1/3 cup of", name: "Caesar dressing"),
+                .init(amount: "1", name: "Chicken breast")
+            ],
             steps: [
                 Step(order: 1, instruction: "Chop and wash the romaine lettuce.", imageName: nil, timerDuration: 3),
                 Step(order: 2, instruction: "Grill chicken and slice thinly.", imageName: nil, timerDuration: 10),
