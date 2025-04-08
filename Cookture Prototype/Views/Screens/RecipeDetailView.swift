@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import GlowGetter
 
 struct RecipeDetailView: View {
     @EnvironmentObject var viewModel: ViewModel
+    
+    @Environment(\.colorScheme) var colorScheme
     
     let recipe: Recipe
     
@@ -17,54 +20,62 @@ struct RecipeDetailView: View {
     }
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                if let imageName = recipe.imageName {
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 700, height: 410)
-                        .clipped()
-                        .cornerRadius(20, corners: .allCorners)
-                        .padding(.vertical)
-                }
-                
-                Text(recipe.name)
-                    .customFont(size: 33, weight: .black)
-                
-                Text(recipe.description)
-                    .foregroundStyle(.gray)
-                
-                info
-                
-                Divider()
-                    .frame(width: 700)
-                    .padding()
-                
-                VStack {
-                    Text("Ingredients")
-                        .customFont(size: 20, weight: .semibold)
-                        .alignView(to: .leading)
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack {
+                    if let imageName = recipe.imageName {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 700, height: 410)
+                            .clipped()
+                            .cornerRadius(20, corners: .allCorners)
+                            .padding(.vertical)
+                            .id("top")
+                    }
                     
-                    VStack(alignment: .leading, spacing: 8) {
-                        ForEach(recipe.ingredients) { ingredient in
-                            HStack(spacing: 4) {
-                                Text(ingredient.amount.capitalisedFirst)
-                                    .customFont(size: 20)
-                                
-                                Text(ingredient.name)
-                                    .customFont(size: 20, weight: .medium)
-                                    .foregroundStyle(.seaBlue)
+                    Text(recipe.name)
+                        .customFont(size: 33, weight: .black)
+                    
+                    Text(recipe.description)
+                        .foregroundStyle(.gray)
+                    
+                    info
+                    
+                    Divider()
+                        .frame(width: 700)
+                        .padding()
+                    
+                    VStack {
+                        Text("Ingredients")
+                            .customFont(size: 20, weight: .semibold)
+                            .alignView(to: .leading)
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            ForEach(recipe.ingredients) { ingredient in
+                                HStack(spacing: 4) {
+                                    Text(ingredient.amount.capitalisedFirst)
+                                        .customFont(size: 20)
+                                    
+                                    Text(ingredient.name)
+                                        .customFont(size: 20, weight: .bold)
+                                        .foregroundStyle(.seaBlue)
+                                }
                             }
                         }
+                        .alignView(to: .leading)
+                        .padding()
+                        .background(Material.ultraThin)
+                        .cornerRadius(20, corners: .allCorners)
                     }
-                    .alignView(to: .leading)
-                    .padding()
-                    .background(Material.ultraThin)
-                    .cornerRadius(20, corners: .allCorners)
+                    .frame(width: 700)
+                }.safeAreaPadding(.bottom, 20)
+            }
+            .onChange(of: self.viewModel.selectedRecipe) { oldValue, newValue in
+                if oldValue?.id != newValue?.id {
+                    withAnimation(.spring) { proxy.scrollTo("top") }
                 }
-                .frame(width: 700)
-            }.safeAreaPadding(.bottom, 20)
+            }
         }
         .navigationTitle(recipe.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -82,8 +93,12 @@ struct RecipeDetailView: View {
                         .foregroundStyle(.accent)
                 }
                 .padding(25)
-                .background(Color.white)
-                .cornerRadius(28, corners: .allCorners)
+                .background {
+                    Capsule()
+                        .fill(Color.white)
+                        .shadow(color: .black.opacity(0.3), radius: 25)
+                        .glow(1.0, Capsule())
+                }
                 .padding()
             }
             .scaleButtonStyle()
@@ -125,7 +140,7 @@ struct RecipeDetailView: View {
         }
         .padding()
         .background(Material.ultraThin)
-        .cornerRadius(15, corners: .allCorners)
+        .cornerRadius(17, corners: .allCorners)
     }
 }
 

@@ -9,14 +9,14 @@ import SwiftUI
 
 final class ViewModel: ObservableObject {
     @Published var selectedRecipe: Recipe? = nil
+    @Published var isShowingCookingView: Bool = false
+    @Published var searchText: String = ""
     
     func changeSelectedRecipe(_ recipe: Recipe?) {
         withAnimation(.spring) {
             self.selectedRecipe = recipe
         }
     }
-    
-    @Published var isShowingCookingView: Bool = false
     
     func showCookingView() {
         withAnimation(.spring) {
