@@ -41,17 +41,7 @@ struct ContentView: View {
             }
         }
         .fullScreenCover(isPresented: $viewModel.isShowingCookingView) {
-            VStack {
-                Text("CookingView for \(self.viewModel.selectedRecipe?.name ?? "nil")")
-                
-                Button("Dismiss") { self.viewModel.hideCookingView() }
-                
-                Divider().padding()
-                
-                ForEach(viewModel.selectedRecipe?.steps ?? CooktureData.recipeData.first!.steps) { step in
-                    Text(step.instruction)
-                }
-            }
+            CookingView(viewModel.selectedRecipe ?? CooktureData.recipeData.first!)
         }
     }
 }

@@ -22,8 +22,8 @@ struct CooktureData {
             ],
             steps: [
                 Step(order: 1, instruction: "Boil spaghetti until al dente.", imageName: nil, timerDuration: 10),
-                Step(order: 2, instruction: "Cook ground beef until browned.", imageName: nil, timerDuration: 8),
-                Step(order: 3, instruction: "Add tomato sauce, onion, and garlic. Simmer.", imageName: nil, timerDuration: 15)
+                Step(order: 2, instruction: "Cook ground beef until browned.", imageName: "spaghetti.bolognese.step.no.2", timerDuration: nil),
+                Step(order: 3, instruction: "Add tomato sauce, onion, and garlic. Simmer.", imageName: nil, timerDuration: nil)
             ],
             time: 35,
             servings: 4,
@@ -45,8 +45,8 @@ struct CooktureData {
             ],
             steps: [
                 Step(order: 1, instruction: "Toast the bread.", imageName: nil, timerDuration: 3),
-                Step(order: 2, instruction: "Mash avocado with salt, pepper, and lemon juice.", imageName: nil, timerDuration: 2),
-                Step(order: 3, instruction: "Spread mixture on toast and serve.", imageName: nil, timerDuration: 1)
+                Step(order: 2, instruction: "Mash avocado with salt, pepper, and lemon juice.", imageName: nil, timerDuration: nil),
+                Step(order: 3, instruction: "Spread mixture on toast and serve.", imageName: nil, timerDuration: nil)
             ],
             time: 6,
             servings: 1,
@@ -67,9 +67,9 @@ struct CooktureData {
                 .init(amount: "1 can of", name: "Coconut milk")
             ],
             steps: [
-                Step(order: 1, instruction: "Sauté onions until golden.", imageName: nil, timerDuration: 5),
-                Step(order: 2, instruction: "Add chicken and cook thoroughly.", imageName: nil, timerDuration: 10),
-                Step(order: 3, instruction: "Stir in spices, tomato, and coconut milk. Simmer.", imageName: nil, timerDuration: 20)
+                Step(order: 1, instruction: "Sauté onions until golden.", imageName: nil, timerDuration: nil),
+                Step(order: 2, instruction: "Add chicken and cook thoroughly.", imageName: nil, timerDuration: nil),
+                Step(order: 3, instruction: "Stir in spices, tomato, and coconut milk. Simmer.", imageName: nil, timerDuration: nil)
             ],
             time: 40,
             servings: 4,
@@ -90,9 +90,9 @@ struct CooktureData {
                 .init(amount: "2 tablespoons of", name: "Sugar")
             ],
             steps: [
-                Step(order: 1, instruction: "Mix dry and wet ingredients into a batter.", imageName: nil, timerDuration: 5),
-                Step(order: 2, instruction: "Heat pan and pour batter.", imageName: nil, timerDuration: 2),
-                Step(order: 3, instruction: "Flip pancakes when bubbles appear. Cook until golden.", imageName: nil, timerDuration: 3)
+                Step(order: 1, instruction: "Mix dry and wet ingredients into a batter.", imageName: nil, timerDuration: nil),
+                Step(order: 2, instruction: "Heat pan and pour batter.", imageName: nil, timerDuration: nil),
+                Step(order: 3, instruction: "Flip pancakes when bubbles appear. Cook until golden.", imageName: nil, timerDuration: nil)
             ],
             time: 15,
             servings: 3,
@@ -113,9 +113,9 @@ struct CooktureData {
                 .init(amount: "1", name: "Chicken breast")
             ],
             steps: [
-                Step(order: 1, instruction: "Chop and wash the romaine lettuce.", imageName: nil, timerDuration: 3),
-                Step(order: 2, instruction: "Grill chicken and slice thinly.", imageName: nil, timerDuration: 10),
-                Step(order: 3, instruction: "Toss lettuce with dressing, chicken, croutons, and parmesan.", imageName: nil, timerDuration: 2)
+                Step(order: 1, instruction: "Chop and wash the romaine lettuce.", imageName: nil, timerDuration: nil),
+                Step(order: 2, instruction: "Grill chicken and slice thinly.", imageName: nil, timerDuration: nil),
+                Step(order: 3, instruction: "Toss lettuce with dressing, chicken, croutons, and parmesan.", imageName: nil, timerDuration: nil)
             ],
             time: 15,
             servings: 2,

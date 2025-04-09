@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import GlowGetter
 
 struct RecipeDetailView: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -97,7 +96,6 @@ struct RecipeDetailView: View {
                     Capsule()
                         .fill(Color.white)
                         .shadow(color: .black.opacity(0.3), radius: 25)
-                        .glow(1.0, Capsule())
                 }
                 .padding()
             }
