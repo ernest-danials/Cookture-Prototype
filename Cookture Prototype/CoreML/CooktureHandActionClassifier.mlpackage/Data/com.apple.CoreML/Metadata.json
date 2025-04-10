@@ -1,0 +1,16 @@
+{
+  "MLModelVersionStringKey" : "0.1.0",
+  "MLModelDescriptionKey" : "--",
+  "MLModelCreatorDefinedKey" : {
+    "Target Frame Rate" : "30.0",
+    "com.apple.coreml.model.preview.type" : "handActionClassifier",
+    "com.apple.createml.training.started" : "2025-04-09T03:58:05Z",
+    "com.apple.createml.training.finished" : "2025-04-09T03:59:27Z",
+    "com.apple.createml.app.tag" : "151.2",
+    "com.apple.createml.model.created" : "2025-04-09T03:59:27Z",
+    "com.apple.createml.app.version" : "6.2",
+    "Prediction Window Size" : "60"
+  },
+  "MLModelAuthorKey" : "Myung Joon Kang",
+  "MLModelLicenseKey" : "--"
+}
