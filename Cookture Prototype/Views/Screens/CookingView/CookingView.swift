@@ -13,8 +13,6 @@ struct CookingView: View {
     
     let recipe: Recipe
     
-    @State private var currentStepID: UUID? = nil
-    
     @State private var idleTimer: Timer? = nil
     private let idleDelay: TimeInterval = 1.5
     
@@ -26,10 +24,8 @@ struct CookingView: View {
         GeometryReader { geo in
             ScrollViewReader { proxy in
                 HStack(alignment: .bottom) {
-                    if let step = self.recipe.steps.filter({ $0.id == currentStepID }).first {
+                    if let step = self.recipe.steps.filter({ $0.id == self.subViewModel.currentStepID }).first {
                         VStack(alignment: .leading, spacing: 15) {
-                            Text(self.subViewModel.classificationLabel)
-                            
                             Text("Current Step")
                                 .customFont(size: 25, weight: .medium)
                             
@@ -51,7 +47,7 @@ struct CookingView: View {
                                         Image(imageName)
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(width: min(geo.size.width - 400, 600))
+                                            .frame(minWidth: min(geo.size.width - 300, 600))
                                             .cornerRadius(30, corners: .allCorners)
                                             .padding(.top)
                                     }
@@ -104,7 +100,7 @@ struct CookingView: View {
                     .scrollIndicators(.hidden)
                     .contentMargins(100, for: .scrollContent)
                     .scrollTargetBehavior(.paging)
-                    .onChange(of: self.currentStepID) { oldValue, newValue in
+                    .onChange(of: self.subViewModel.currentStepID) { oldValue, newValue in
                         if oldValue != newValue && oldValue != nil {
                             withAnimation(.spring) { proxy.scrollTo(newValue) }
                         }
@@ -130,11 +126,11 @@ struct CookingView: View {
                         
                         Spacer()
                         
-                        let isFirst = self.recipe.steps.first?.id == currentStepID
-                        let isLast = self.recipe.steps.last?.id == currentStepID
+                        let isFirst = self.recipe.steps.first?.id == self.subViewModel.currentStepID
+                        let isLast = self.recipe.steps.last?.id == self.subViewModel.currentStepID
                         
                         Button {
-                            moveStep(forward: false)
+                            self.subViewModel.moveStep(recipe: recipe, forward: false)
                         } label: {
                             Image(systemName: "chevron.up")
                                 .customFont(size: 30, weight: .bold)
@@ -148,7 +144,7 @@ struct CookingView: View {
                         .disabled(isFirst)
                         
                         Button {
-                            moveStep(forward: true)
+                            self.subViewModel.moveStep(recipe: recipe, forward: true)
                         } label: {
                             Image(systemName: "chevron.down")
                                 .customFont(size: 30, weight: .bold)
@@ -163,20 +159,32 @@ struct CookingView: View {
                     }.frame(minWidth: 100, maxWidth: 110)
                 }
                 .padding(.horizontal)
+                .onChange(of: self.subViewModel.classificationLabelProbabilities) { oldValue, newValue in
+                    if let topResult = CooktureHandActionClassifierResult(rawValue: self.subViewModel.classificationLabel), let oldProbability = oldValue[topResult.rawValue], let newProbability = newValue[topResult.rawValue] {
+                        if newProbability != oldProbability && newProbability > 0.5 {
+                            switch topResult {
+                            case .swipeup:
+                                self.subViewModel.moveStep(recipe: self.recipe, forward: true)
+                            case .swipeDown:
+                                self.subViewModel.moveStep(recipe: self.recipe, forward: false)
+                            case .openFist:
+                                break
+                                // Start timer
+                            case .closeFist:
+                                break
+                                // Stop timer
+                            }
+                            
+                            print("Updated CookingView with following classification results: " + topResult.rawValue + " with probability " + String(self.subViewModel.classificationLabelProbabilities[topResult.rawValue] ?? 0))
+                        }
+                    } else {
+                        // Handle error here...
+                    }
+                }
             }.task {
-                self.currentStepID = self.recipe.steps.first?.id
+                self.subViewModel.currentStepID = self.recipe.steps.first?.id
             }
         }
-    }
-    
-    private func moveStep(forward: Bool) {
-        let currentIndex = self.recipe.steps.firstIndex(where: { $0.id == self.currentStepID })
-        
-        let destinationIndex = forward ? (currentIndex ?? 0) + 1 : (currentIndex ?? 0) - 1
-        
-        guard (0 ..< self.recipe.steps.count).contains(destinationIndex) else { return }
-        
-        withAnimation { self.currentStepID = self.recipe.steps[destinationIndex].id }
     }
     
     private func scheduleIdleScroll(with scrollProxy: ScrollViewProxy) {
@@ -184,7 +192,7 @@ struct CookingView: View {
         
         idleTimer = Timer.scheduledTimer(withTimeInterval: idleDelay, repeats: false) { _ in
             Task { @MainActor in
-                withAnimation { scrollProxy.scrollTo(self.currentStepID, anchor: .top) }
+                withAnimation { scrollProxy.scrollTo(self.subViewModel.currentStepID, anchor: .top) }
             }
         }
     }

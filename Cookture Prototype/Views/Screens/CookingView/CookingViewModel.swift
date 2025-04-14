@@ -16,6 +16,8 @@ final class CookingViewModel: NSObject, ObservableObject {
     @Published var classificationLabelProbabilities: [String: Double] = [:]
     @Published var cameraAuthorizationStatus: AVAuthorizationStatus = .notDetermined
     
+    @Published var currentStepID: UUID? = nil
+    
     // MARK: - Private Properties
     private var model: CooktureHandActionClassifier?
     private let handPoseRequest = VNDetectHumanHandPoseRequest()
@@ -173,6 +175,17 @@ final class CookingViewModel: NSObject, ObservableObject {
             print("Error performing model prediction: \(error)")
         }
     }
+    
+    // MARK: - UI Handling Functions
+    func moveStep(recipe: Recipe, forward: Bool) {
+        let currentIndex = recipe.steps.firstIndex(where: { $0.id == self.currentStepID })
+        
+        let destinationIndex = forward ? (currentIndex ?? 0) + 1 : (currentIndex ?? 0) - 1
+        
+        guard (0 ..< recipe.steps.count).contains(destinationIndex) else { return }
+        
+        withAnimation { self.currentStepID = recipe.steps[destinationIndex].id }
+    }
 }
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
@@ -182,8 +195,24 @@ extension CookingViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         
+        // Determine the correct camera orientation based on the connection's videoOrientation
+        let videoOrientation = connection.videoOrientation
+        let imageOrientation: CGImagePropertyOrientation
+        switch videoOrientation {
+        case .portrait:
+            imageOrientation = .right
+        case .portraitUpsideDown:
+            imageOrientation = .left
+        case .landscapeRight:
+            imageOrientation = .down
+        case .landscapeLeft:
+            imageOrientation = .up
+        @unknown default:
+            imageOrientation = .right
+        }
+        
         // Create a request handler
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: imageOrientation, options: [:])
         
         do {
             // Perform the request
@@ -198,6 +227,8 @@ extension CookingViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+// MARK: - Classification Result Enumeration
+// This is for a safe and easy result handling.
 enum CooktureHandActionClassifierResult: String {
     case swipeup = "Swipe up"
     case swipeDown = "Swipe down"
