@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		171731882D9F4EBF00ACD831 /* RenderMeThis in Frameworks */ = {isa = PBXBuildFile; productRef = 171731872D9F4EBF00ACD831 /* RenderMeThis */; };
-		171731942D9F535900ACD831 /* ErrorManager in Frameworks */ = {isa = PBXBuildFile; productRef = 171731932D9F535900ACD831 /* ErrorManager */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				171731882D9F4EBF00ACD831 /* RenderMeThis in Frameworks */,
-				171731942D9F535900ACD831 /* ErrorManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +71,6 @@
 			name = "Cookture Prototype";
 			packageProductDependencies = (
 				171731872D9F4EBF00ACD831 /* RenderMeThis */,
-				171731932D9F535900ACD831 /* ErrorManager */,
 			);
 			productName = "Cookture Prototype";
 			productReference = 178B23882D9F37DD00185F02 /* Cookture Prototype.app */;
@@ -105,7 +102,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				171731862D9F4EBF00ACD831 /* XCRemoteSwiftPackageReference "RenderMeThis" */,
-				171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 178B23892D9F37DD00185F02 /* Products */;
@@ -276,8 +272,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -313,8 +309,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -365,14 +361,6 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ernest-danials/ErrorManager";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -380,11 +368,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 171731862D9F4EBF00ACD831 /* XCRemoteSwiftPackageReference "RenderMeThis" */;
 			productName = RenderMeThis;
-		};
-		171731932D9F535900ACD831 /* ErrorManager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 171731922D9F535900ACD831 /* XCRemoteSwiftPackageReference "ErrorManager" */;
-			productName = ErrorManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
