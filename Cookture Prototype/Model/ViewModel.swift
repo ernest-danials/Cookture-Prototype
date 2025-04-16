@@ -13,7 +13,7 @@ final class ViewModel: ObservableObject {
     @AppStorage("swipeUpScore", store: .standard) var swipeUpScore: Int = 0
     @AppStorage("swipeDownScore", store: .standard) var swipeDownScore: Int = 0
     @AppStorage("openFistScore", store: .standard) var openFistScore: Int = 0
-    @AppStorage("closeFistScorex", store: .standard) var closeFistScore: Int = 0
+    @AppStorage("closeFistScore", store: .standard) var closeFistScore: Int = 0
     
     // MARK: - Published Properties
     @Published var selectedRecipe: Recipe? = nil
