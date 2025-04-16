@@ -229,9 +229,11 @@ extension CookingViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 // MARK: - Classification Result Enumeration
 // This is for a safe and easy result handling.
-enum CooktureHandActionClassifierResult: String {
+enum CooktureHandActionClassifierResult: String, CaseIterable, Identifiable {
     case swipeup = "Swipe up"
     case swipeDown = "Swipe down"
     case openFist = "Open fist"
     case closeFist = "Close fist"
+    
+    var id: Self { self } 
 }

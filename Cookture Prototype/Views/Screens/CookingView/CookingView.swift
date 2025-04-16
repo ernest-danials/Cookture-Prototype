@@ -134,30 +134,47 @@ struct CookingView: View {
                 controlButton
             }
             .padding(.horizontal)
+            .overlay(alignment: .top) {
+                if !self.subViewModel.classificationLabel.isEmpty {
+                    let probabilityString = String(format: "%.0f", (self.subViewModel.classificationLabelProbabilities[self.subViewModel.classificationLabel] ?? 0) * 100)
+                    
+                    Text("Detected Hand Gesture: " + self.subViewModel.classificationLabel + ", with probability of " + probabilityString + "%")
+                        .customFont(size: 18, weight: .semibold)
+                        .contentTransition(.numericText(value: self.subViewModel.classificationLabelProbabilities[self.subViewModel.classificationLabel] ?? 0))
+                        .padding()
+                        .background(Material.ultraThin)
+                        .cornerRadius(15, corners: .allCorners)
+                        .padding()
+                }
+            }
             .onChange(of: self.subViewModel.currentStepID) { _, _ in
                 stopTimer()
                 self.remainingTime = nil
             }
             .onChange(of: self.subViewModel.classificationLabelProbabilities) { oldValue, newValue in
                 if let topResult = CooktureHandActionClassifierResult(rawValue: self.subViewModel.classificationLabel), let oldProbability = oldValue[topResult.rawValue], let newProbability = newValue[topResult.rawValue] {
-                    if newProbability != oldProbability && newProbability > 0.5 {
+                    if newProbability != oldProbability && newProbability > self.viewModel.probabilityThreshold {
                         switch topResult {
                         case .swipeup:
                             self.subViewModel.moveStep(recipe: self.recipe, forward: true)
+                            self.viewModel.swipeUpScore += 1
                         case .swipeDown:
                             self.subViewModel.moveStep(recipe: self.recipe, forward: false)
+                            self.viewModel.swipeDownScore += 1
                         case .openFist:
                             if let step = self.recipe.steps.first(where: { $0.id == self.subViewModel.currentStepID }), let duration = step.timerDuration {
                                 self.startTimer(from: duration * 60)
                             }
+                            self.viewModel.openFistScore += 1
                         case .closeFist:
                             self.stopTimer()
+                            self.viewModel.closeFistScore += 1
                         }
                         
                         print("Updated CookingView with following classification results: " + topResult.rawValue + " with probability " + String(self.subViewModel.classificationLabelProbabilities[topResult.rawValue] ?? 0))
                     }
                 } else {
-                    // Handle error here...
+                    print("Failed to parse classification results.")
                 }
             }
         }.task {

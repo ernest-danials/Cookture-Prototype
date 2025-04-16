@@ -33,6 +33,15 @@ struct ContentView: View {
             .prioritiseScaleButtonStyle()
             .navigationTitle("Cookture")
             .searchable(text: $viewModel.searchText, placement: .sidebar, prompt: Text("Search for a recipe"))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        self.viewModel.showSettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
         } detail: {
             if let recipe = viewModel.selectedRecipe {
                 RecipeDetailView(recipe)
@@ -42,6 +51,9 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: $viewModel.isShowingCookingView) {
             CookingView(viewModel.selectedRecipe ?? CooktureData.recipeData.first!)
+        }
+        .sheet(isPresented: $viewModel.isShowingSettingsView) {
+            SettingsView()
         }
     }
 }
