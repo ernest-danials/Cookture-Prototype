@@ -9,6 +9,7 @@ import SwiftUI
 import CoreML
 import Vision
 import AVFoundation
+import ImageIO
 
 final class CookingViewModel: NSObject, ObservableObject {
     // MARK: - Published Properties
@@ -195,18 +196,27 @@ extension CookingViewModel: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         
-        // Determine the correct camera orientation based on the connection's videoOrientation
+        // Determine the correct camera orientation, accounting for front‑camera mirroring
         let videoOrientation = connection.videoOrientation
+        let isMirrored = connection.isVideoMirrored
         let imageOrientation: CGImagePropertyOrientation
-        switch videoOrientation {
-        case .portrait:
+        switch (videoOrientation, isMirrored) {
+        case (.portrait, false):
             imageOrientation = .right
-        case .portraitUpsideDown:
+        case (.portraitUpsideDown, false):
             imageOrientation = .left
-        case .landscapeRight:
+        case (.landscapeRight, false):
             imageOrientation = .down
-        case .landscapeLeft:
+        case (.landscapeLeft, false):
             imageOrientation = .up
+        case (.portrait, true):
+            imageOrientation = .leftMirrored
+        case (.portraitUpsideDown, true):
+            imageOrientation = .rightMirrored
+        case (.landscapeRight, true):
+            imageOrientation = .downMirrored
+        case (.landscapeLeft, true):
+            imageOrientation = .upMirrored
         @unknown default:
             imageOrientation = .right
         }
@@ -235,5 +245,5 @@ enum CooktureHandActionClassifierResult: String, CaseIterable, Identifiable {
     case openFist = "Open fist"
     case closeFist = "Close fist"
     
-    var id: Self { self } 
+    var id: Self { self }
 }

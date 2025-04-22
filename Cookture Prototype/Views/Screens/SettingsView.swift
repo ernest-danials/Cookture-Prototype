@@ -16,12 +16,23 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    Text("Current Probability Threshold: " + String(format: "%.0f", self.viewModel.probabilityThreshold * 100) + "%")
-                    Slider(value: $viewModel.probabilityThreshold, in: 0.1...0.95, step: 0.01, label: { Text("Probability Threshold") }, minimumValueLabel: { Text("10%") }, maximumValueLabel: { Text("95%") })
+                    HStack {
+                        Text("Probability Threshold: " + String(format: "%.0f", self.viewModel.probabilityThreshold * 100) + "%")
+                            .contentTransition(.numericText(value: self.viewModel.probabilityThreshold))
+                        
+                        Slider(value: $viewModel.probabilityThreshold, in: 0.1...0.95, step: 0.01, label: { Text("Probability Threshold") })
+                    }
+                    
+                    HStack {
+                        Text("Fist Probability Threshold: " + String(format: "%.0f", self.viewModel.fistProbabilityThreshold * 100) + "%")
+                            .contentTransition(.numericText(value: self.viewModel.fistProbabilityThreshold))
+                        
+                        Slider(value: $viewModel.fistProbabilityThreshold, in: 0.1...0.95, step: 0.01, label: { Text("Fist Probability Threshold") })
+                    }
                 } header: {
-                    Text("Probability Threshold")
+                    Text("Probability Thresholds")
                 } footer: {
-                    Text("Sets the probability for the ML model to classify a hand gesture. Cookture will only perform the corresponding actions when the probability is above this threshold. Higher threshold will result in a more accurate gesture classification, but may also result in less natural interactions. The minimum threshold is 10%, and the maximum is 95%.")
+                    Text("Sets the probability for the ML model to classify a hand gesture. Cookture will only perform the corresponding actions when the probability is above this threshold. Higher threshold will result in a more accurate gesture classification, but may also result in less natural interactions. The minimum threshold is 10%, and the maximum is 95%. The threshold for fist actions are separated since it is advised to have a higher value for convienience.")
                 }
                 
                 Section {
@@ -40,6 +51,7 @@ struct SettingsView: View {
                         }
                         
                         Text(result.rawValue + ": " + "\(value)")
+                            .contentTransition(.numericText(countsDown: true))
                     }
                 } header: {
                     Text("Classification History")

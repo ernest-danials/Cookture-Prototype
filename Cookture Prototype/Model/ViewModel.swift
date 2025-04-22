@@ -10,6 +10,7 @@ import SwiftUI
 final class ViewModel: ObservableObject {
     // MARK: - AppStorage Properties
     @AppStorage("probabilityThreshold", store: .standard) var probabilityThreshold: Double = 0.8
+    @AppStorage("fistProbabilityThreshold", store: .standard) var fistProbabilityThreshold: Double = 0.9
     @AppStorage("swipeUpScore", store: .standard) var swipeUpScore: Int = 0
     @AppStorage("swipeDownScore", store: .standard) var swipeDownScore: Int = 0
     @AppStorage("openFistScore", store: .standard) var openFistScore: Int = 0
@@ -55,6 +56,7 @@ final class ViewModel: ObservableObject {
     func resetProbabilityThresholdToDefault() {
         withAnimation(.spring) {
             self.probabilityThreshold = 0.8
+            self.fistProbabilityThreshold = 0.9
         }
     }
     

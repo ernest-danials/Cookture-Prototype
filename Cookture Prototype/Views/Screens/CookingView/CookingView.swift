@@ -153,14 +153,12 @@ struct CookingView: View {
             }
             .onChange(of: self.subViewModel.classificationLabelProbabilities) { oldValue, newValue in
                 if let topResult = CooktureHandActionClassifierResult(rawValue: self.subViewModel.classificationLabel), let oldProbability = oldValue[topResult.rawValue], let newProbability = newValue[topResult.rawValue] {
-                    if newProbability != oldProbability && newProbability > self.viewModel.probabilityThreshold {
+                    if (topResult == .closeFist || topResult == .openFist) && newProbability > self.viewModel.fistProbabilityThreshold {
                         switch topResult {
                         case .swipeup:
-                            self.subViewModel.moveStep(recipe: self.recipe, forward: true)
-                            self.viewModel.swipeUpScore += 1
+                            print("Failed to parse classification results.")
                         case .swipeDown:
-                            self.subViewModel.moveStep(recipe: self.recipe, forward: false)
-                            self.viewModel.swipeDownScore += 1
+                            print("Failed to parse classification results.")
                         case .openFist:
                             if let step = self.recipe.steps.first(where: { $0.id == self.subViewModel.currentStepID }), let duration = step.timerDuration {
                                 self.startTimer(from: duration * 60)
@@ -170,9 +168,22 @@ struct CookingView: View {
                             self.stopTimer()
                             self.viewModel.closeFistScore += 1
                         }
-                        
-                        print("Updated CookingView with following classification results: " + topResult.rawValue + " with probability " + String(self.subViewModel.classificationLabelProbabilities[topResult.rawValue] ?? 0))
+                    } else if (topResult == .swipeup || topResult == .swipeDown) && newProbability > self.viewModel.probabilityThreshold {
+                        switch topResult {
+                        case .swipeup:
+                            self.subViewModel.moveStep(recipe: self.recipe, forward: true)
+                            self.viewModel.swipeUpScore += 1
+                        case .swipeDown:
+                            self.subViewModel.moveStep(recipe: self.recipe, forward: false)
+                            self.viewModel.swipeDownScore += 1
+                        case .openFist:
+                            print("Failed to parse classification results.")
+                        case .closeFist:
+                            print("Failed to parse classification results.")
+                        }
                     }
+                    
+                    print("Updated CookingView with following classification results: " + topResult.rawValue + " with probability " + String(self.subViewModel.classificationLabelProbabilities[topResult.rawValue] ?? 0))
                 } else {
                     print("Failed to parse classification results.")
                 }

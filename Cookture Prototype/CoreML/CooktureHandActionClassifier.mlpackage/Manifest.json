@@ -1,24 +1,24 @@
 {
     "fileFormatVersion": "1.0.0",
     "itemInfoEntries": {
-        "27019FDC-493A-4474-A27A-B7AB34408836": {
+        "32A405E7-3683-46AD-B7DE-4FED9C0DEF72": {
             "author": "com.apple.CoreML",
             "description": "External Metadata Overlay",
             "name": "Metadata.json",
             "path": "com.apple.CoreML/Metadata.json"
         },
-        "B4723793-9ED8-4462-9C3D-2A00E6368A1E": {
+        "C1CF5D64-7CA6-43FA-98C6-B12C86D32882": {
             "author": "com.apple.CoreML",
             "description": "External FeatureDescription Overlay",
             "name": "FeatureDescriptions.json",
             "path": "com.apple.CoreML/FeatureDescriptions.json"
         },
-        "D75EA931-560C-43F0-8D46-E94CEB4BE153": {
+        "D0D2BF39-09BC-4EF9-94EA-7D8D566CEFD7": {
             "author": "com.apple.CoreML",
             "description": "CoreML Model Specification",
             "name": "CooktureHandActionClassifier.mlmodel",
             "path": "com.apple.CoreML/CooktureHandActionClassifier.mlmodel"
         }
     },
-    "rootModelIdentifier": "D75EA931-560C-43F0-8D46-E94CEB4BE153"
+    "rootModelIdentifier": "D0D2BF39-09BC-4EF9-94EA-7D8D566CEFD7"
 }
