@@ -58,7 +58,7 @@ final class ViewModel: ObservableObject {
         }
     }
     
-    func resetClassificationHistory() {
+    func deleteClassificationHistory() {
         withAnimation(.spring) {
             self.swipeUpScore = 0
             self.swipeDownScore = 0

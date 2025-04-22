@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var viewModel: ViewModel
+    
+    @State private var isShowingResetProabilityThresholdConfirmation: Bool = false
+    @State private var isShowingDeleteClassificationHistoryConfirmation: Bool = false
     var body: some View {
         NavigationStack {
             Form {
@@ -45,12 +48,18 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Button("Reset Probability Threshold to Default") { self.viewModel.resetProbabilityThresholdToDefault() }
-                    Button("Reset Classification History") { self.viewModel.resetClassificationHistory() }
+                    Button("Reset Probability Threshold to Default") { self.isShowingResetProabilityThresholdConfirmation = true }
+                    Button("Delete Classification History") { self.isShowingDeleteClassificationHistoryConfirmation = true }
                 } header: {
                     Text("Danger Zone")
                 } footer: {
                     Text("Reset Probability to Default: Will reset the probability threshold to its default value of 80%. \nReset Classification History: Will reset all history of gesture classifications.")
+                }
+                .confirmationDialog("Are you sure?", isPresented: $isShowingResetProabilityThresholdConfirmation, titleVisibility: .visible) {
+                    Button("Reset Probability Threshold to Default", role: .destructive) { self.viewModel.resetProbabilityThresholdToDefault() }
+                }
+                .confirmationDialog("Are you sure?", isPresented: $isShowingDeleteClassificationHistoryConfirmation, titleVisibility: .visible) {
+                    Button("Delete All Classification History", role: .destructive) { self.viewModel.deleteClassificationHistory() }
                 }
             }
             .navigationTitle("Settings")
