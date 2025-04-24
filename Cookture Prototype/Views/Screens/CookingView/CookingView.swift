@@ -152,7 +152,7 @@ struct CookingView: View {
                 self.remainingTime = nil
             }
             .onChange(of: self.subViewModel.classificationLabelProbabilities) { oldValue, newValue in
-                if let topResult = CooktureHandActionClassifierResult(rawValue: self.subViewModel.classificationLabel), let oldProbability = oldValue[topResult.rawValue], let newProbability = newValue[topResult.rawValue] {
+                if let topResult = CooktureHandActionClassifierResult(rawValue: self.subViewModel.classificationLabel), let newProbability = newValue[topResult.rawValue] {
                     if (topResult == .closeFist || topResult == .openFist) && newProbability > self.viewModel.fistProbabilityThreshold {
                         switch topResult {
                         case .swipeup:
